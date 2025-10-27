@@ -53,7 +53,7 @@ def Download_cWF_File_List(username, password, cWF_data_dir_local):
         1: the file is downloaded sucessfully
         0: unable to download the file
     """
-    ulr_cygnss = 'https://www.ice.csic.es/research/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_CYGNSS_RawIF_Track.txt'
+    ulr_cygnss = 'https://aliga.ice.csic.es/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_CYGNSS_RawIF_Track.txt'
     filename = cWF_data_dir_local + os.path.basename(urlparse(ulr_cygnss).path)
     try:
         print ("Downloading file: " + '"' + os.path.basename(urlparse(ulr_cygnss).path) + '"' + '...')
@@ -69,7 +69,7 @@ def Download_cWF_File_List(username, password, cWF_data_dir_local):
         print("Cannot download CYGNSS complex waveform list file")
         return False
 
-    ulr_tds1 = 'https://www.ice.csic.es/research/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_TDS1_RawIF_Track.txt'
+    ulr_tds1 = 'https://aliga.ice.csic.es/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_TDS1_RawIF_Track.txt'
     filename = cWF_data_dir_local + os.path.basename(urlparse(ulr_tds1).path)
     try:
         print ("Downloading file: " + '"' + os.path.basename(urlparse(ulr_tds1).path) + '"' + '...')
@@ -114,8 +114,8 @@ def Find_RawIF_Track(Region, Start_time, Stop_time, TrackListFile, cWF_data_dir_
         A list of raw IF tracks and their location in the GOLD-RTR server
     """
     f_TrackListFile = open(TrackListFile, 'w')
-    dir_cygnss_cwf = 'https://www.ice.csic.es/research/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/CYGNSS_CWF_Products/CYGNSS_Complex_Waveform_Release/'
-    dir_tds1_cwf   = 'https://www.ice.csic.es/research/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/TDS1_CWF_Products/TDS1_Complex_Waveform_Release/'
+    dir_cygnss_cwf = 'https://aliga.ice.csic.es/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/CYGNSS_CWF_Products/CYGNSS_Complex_Waveform_Release/'
+    dir_tds1_cwf   = 'https://aliga.ice.csic.es/gold_rtr_mining/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/TDS1_CWF_Products/TDS1_Complex_Waveform_Release/'
     start_time_obj = datetime.datetime.strptime(Start_time, '%Y-%m-%dT%H:%M:%S')
     stop_time_obj  = datetime.datetime.strptime(Stop_time,  '%Y-%m-%dT%H:%M:%S')
     # Find CYGNSS tracks

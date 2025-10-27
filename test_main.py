@@ -26,9 +26,16 @@ if sys.version_info.major == 3:
 else:
      from urlparse import urlparse    
 
-username = 'username'     # Please replace with your username for the GOLD-RTR MINING Server
-password = 'password'     # Please replace with password for the GOLD-RTR MINING Server
-cWF_data_dir = 'cWF_Data/'
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+username = os.getenv('GOLD_USER')
+password = os.getenv('GOLD_PASS')
+cWF_data_dir = os.getenv('CWF_DATA_DIR', 'cWF_Data/')
+
+if not username or not password:
+    raise RuntimeError("Credentials not found. Set GOLD_USER and GOLD_PASS as env vars or create a .env file.")
 
 '''
 Download raw IF track list files
