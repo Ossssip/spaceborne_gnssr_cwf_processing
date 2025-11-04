@@ -54,7 +54,8 @@ def Download_cWF_File_List(username, password, cWF_data_dir_local):
         0: unable to download the file
     """
     ulr_cygnss = 'https://gnssr-data.ice.csic.es/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_CYGNSS_RawIF_Track.txt'
-    filename = cWF_data_dir_local + os.path.basename(urlparse(ulr_cygnss).path)
+    filename = os.path.join(cWF_data_dir_local, os.path.basename(urlparse(ulr_cygnss).path))
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
     if not os.path.exists(filename):
         try:
             print ("Downloading file: " + '"' + os.path.basename(urlparse(ulr_cygnss).path) + '"' + '...')
@@ -73,7 +74,7 @@ def Download_cWF_File_List(username, password, cWF_data_dir_local):
         print('CYGNSS complex waveform list file already present:', filename)
         
     ulr_tds1 = 'https://gnssr-data.ice.csic.es/data/Spaceborne_GNSSR_RawIFData_OnGroundProcessing/List_TDS1_RawIF_Track.txt'
-    filename = cWF_data_dir_local + os.path.basename(urlparse(ulr_tds1).path)
+    filename = os.path.join(cWF_data_dir_local, os.path.basename(urlparse(ulr_tds1).path))
     if not os.path.exists(filename):
         try:
             print ("Downloading file: " + '"' + os.path.basename(urlparse(ulr_tds1).path) + '"' + '...')
@@ -194,8 +195,8 @@ def Download_cWF_File(url, username, password, cWF_data_dir_local):
         1: the file is downloaded sucessfully
         0: unable to download the file
     """
-    filename = cWF_data_dir_local + os.path.basename(urlparse(url).path)
-    if not os.path.exists(filename):    
+    filename = os.path.join(cWF_data_dir_local, os.path.basename(urlparse(url).path))
+    if not os.path.exists(filename):
         try:
             print ("Downloading file: " + '"' + os.path.basename(urlparse(url).path) + '"' + '...')
             r = requests.get(url, auth=(username,password))
@@ -204,6 +205,7 @@ def Download_cWF_File(url, username, password, cWF_data_dir_local):
             return False
 
         if r.status_code == 200:
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
             open(filename, 'wb').write(r.content)
             print("File " +  '"' + os.path.basename(urlparse(url).path) + '"' + ' downloaded!')
             return True
